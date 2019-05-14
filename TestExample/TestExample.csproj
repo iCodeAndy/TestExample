@@ -94,7 +94,7 @@
     <Compile Include="Pages\HeaderPage.cs" />
     <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\ChangeUserPassword.cs" />
+    <Compile Include="Tests\ChangeUserPasswordTest.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

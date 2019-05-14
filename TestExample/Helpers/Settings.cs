@@ -24,6 +24,14 @@ namespace TestExample.Helpers
         protected string currentURL;
         protected string timeToRunTests;
 
+
+        // Data for Tests.
+        protected static string phoneAdmin = "+79515772917";
+        protected static string passwordAdmin = "Maximum007";
+        protected static string pinCode = "123456";
+        protected static string defaultPassword = "qwe123";
+        protected static string idClient = "903544";
+
         // Initialization of pages and parameters in a child class.
         public virtual void Initialize()
         {
@@ -126,7 +134,7 @@ namespace TestExample.Helpers
             extentReports.AttachReporter(extentHtmlReporter);
             extentHtmlReporter.Config.Theme = AventStack.ExtentReports.Reporter.Configuration.Theme.Dark;
 
-            timeToRunTests = DateTime.Now.DayOfWeek + ":" + DateTime.Now.Hour;
+            timeToRunTests = DateTime.Now.DayOfWeek + "_" + DateTime.Now.Hour;
         }
 
         // Generate a report for the current test.

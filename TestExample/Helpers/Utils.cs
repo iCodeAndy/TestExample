@@ -35,8 +35,8 @@ namespace TestExample.Helpers
         public static void AuthorizationAsAdmin()
         {
             MainPage mainPage = new MainPage();
-            mainPage.Authorization("+79515772917", "Maximum007");
-            mainPage.SetPinCode("123456");
+            mainPage.Authorization(phoneAdmin, passwordAdmin);
+            mainPage.SetPinCode(pinCode);
         }
     }
 }

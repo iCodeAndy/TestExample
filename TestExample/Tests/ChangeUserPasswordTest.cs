@@ -5,7 +5,7 @@ using TestExample.Pages;
 
 namespace TestExample.Tests
 {
-    class ChangeUserPassword : Settings
+    class ChangeUserPasswordTest : Settings
     {
         // Required variables for tests.
         private MainPage mainPage;
@@ -13,7 +13,7 @@ namespace TestExample.Tests
         private HeaderPage headerPage;
         private EnterNewPasswordPage enterNewPasswordPage;
 
-
+        
         // Initializes required variables.
         public override void Initialize()
         {
@@ -32,25 +32,25 @@ namespace TestExample.Tests
         public void ChangeUserPasswordThroughAdminPanelTest()
         {
             mainPage.CloseWarningPopup();
-            mainPage.Authorization("+79515772917", "Maximum007");
-            mainPage.SetPinCode("123456");
+            mainPage.Authorization(phoneAdmin, passwordAdmin);
+            mainPage.SetPinCode(pinCode);
 
             Utils.WaitChangedURL("http://test.greenmoney.ru/Manager/Loans");
-            Utils.NavigateTo("http://test.greenmoney.ru/Admin/EditUser/" + "903544");
+            Utils.NavigateTo("http://test.greenmoney.ru/Admin/EditUser/" + idClient);
 
             string clientPhone = "+" + Regex.Replace(editUserPage.GetUserPhone(), "[^0-9.]", "");
-            editUserPage.ChangePassword("qwe123");
+            editUserPage.ChangePassword(defaultPassword);
             editUserPage.ClickSave();
 
             headerPage.ClickExit();
 
             mainPage.CloseWarningPopup();
-            mainPage.Authorization(clientPhone, "qwe123");
+            mainPage.Authorization(clientPhone, defaultPassword);
 
-            enterNewPasswordPage.InputNewPassword("qwe123");
+            enterNewPasswordPage.InputNewPassword(defaultPassword);
 
             mainPage.CloseWarningPopup();
-            mainPage.Authorization(clientPhone, "qwe123");
+            mainPage.Authorization(clientPhone, defaultPassword);
 
             Assert.IsTrue(headerPage.ExitIsDisplayed());
         }
@@ -59,8 +59,8 @@ namespace TestExample.Tests
         public void DemoTest()
         {
             mainPage.CloseWarningPopup();
-            mainPage.Authorization("+79515772917", "Maximum007");
-            mainPage.SetPinCode("123456");
+            mainPage.Authorization(phoneAdmin, passwordAdmin);
+            mainPage.SetPinCode(pinCode);
 
             Assert.IsTrue(headerPage.ExitIsDisplayed());
         }
@@ -69,8 +69,8 @@ namespace TestExample.Tests
         public void FailedTest()
         {
             mainPage.CloseWarningPopup();
-            mainPage.Authorization("+79515772917", "Maximum007");
-            mainPage.SetPinCode("123456");
+            mainPage.Authorization(phoneAdmin, passwordAdmin);
+            mainPage.SetPinCode(pinCode);
 
             Assert.IsFalse(headerPage.ExitIsDisplayed());
         }
