@@ -35,8 +35,8 @@ namespace TestExample.Tests
             mainPage.Authorization(phoneAdmin, passwordAdmin);
             mainPage.SetPinCode(pinCode);
 
-            Utils.WaitChangedURL("http://test.greenmoney.ru/Manager/Loans");
-            Utils.NavigateTo("http://test.greenmoney.ru/Admin/EditUser/" + idClient);
+            Utils.WaitChangedURL(managerLoans);
+            Utils.NavigateTo(adminEditUser + idClient);
 
             string clientPhone = "+" + Regex.Replace(editUserPage.GetUserPhone(), "[^0-9.]", "");
             editUserPage.ChangePassword(defaultPassword);
@@ -56,7 +56,7 @@ namespace TestExample.Tests
         }
 
         [Test(Description = "Second test for Demonstration of running multiple tests.")]
-        public void DemoTest()
+        public void SuccessAuthorizationTest()
         {
             mainPage.CloseWarningPopup();
             mainPage.Authorization(phoneAdmin, passwordAdmin);
@@ -66,10 +66,10 @@ namespace TestExample.Tests
         }
 
         [Test(Description = "Test for Demostration failed result.")]
-        public void FailedTest()
+        public void AuthorizationWithoutPasswordFailTest()
         {
             mainPage.CloseWarningPopup();
-            mainPage.Authorization(phoneAdmin, passwordAdmin);
+            mainPage.Authorization(phoneAdmin, string.Empty);
             mainPage.SetPinCode(pinCode);
 
             Assert.IsFalse(headerPage.ExitIsDisplayed());

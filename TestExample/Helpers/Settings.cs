@@ -32,6 +32,11 @@ namespace TestExample.Helpers
         protected static string defaultPassword = "qwe123";
         protected static string idClient = "903544";
 
+        // List URL
+        protected static string managerLoans = "http://test.greenmoney.ru/Manager/Loans";
+        protected static string adminEditUser = "http://test.greenmoney.ru/Admin/EditUser/";
+
+
         // Initialization of pages and parameters in a child class.
         public virtual void Initialize()
         {
@@ -90,7 +95,7 @@ namespace TestExample.Helpers
             options.AddArgument("incognito");
 
             webDriver = new ChromeDriver(options);
-            webDriverWait = new WebDriverWait(new SystemClock(), webDriver, TimeSpan.FromSeconds(10), TimeSpan.FromSeconds(3));
+            webDriverWait = new WebDriverWait(new SystemClock(), webDriver, TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(3));
 
             webDriver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(5);
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
@@ -144,7 +149,7 @@ namespace TestExample.Helpers
             TestStatus status = TestContext.CurrentContext.Result.Outcome.Status;
             string stackTrace = "<pre>" + TestContext.CurrentContext.Result.StackTrace + "</pre>";
             string textMessage = "<pre>" + TestContext.CurrentContext.Result.Message + "</pre>";
-            string descriptionTest = TestContext.CurrentContext.Test.Properties.Get("Description").ToString();
+            string descriptionTest = "<pre>" + TestContext.CurrentContext.Test.Properties.Get("Description").ToString() + "</pre>";
 
             // Record the test result.
             switch (status)
@@ -154,7 +159,7 @@ namespace TestExample.Helpers
                     extentTest.Log(Status.Fail, "Description:<br>" + descriptionTest);
                     extentTest.Log(Status.Fail, "Message:<br>" + textMessage);
                     extentTest.Log(Status.Fail, "StackTrace<br>" + stackTrace);
-                    extentTest.Log(Status.Fail, "" + extentTest.AddScreenCaptureFromPath(screenShotPath));
+                    extentTest.Log(Status.Fail, "<pre>" + extentTest.AddScreenCaptureFromPath(screenShotPath) + "</pre>");
                     break;
 
                 case TestStatus.Skipped:
